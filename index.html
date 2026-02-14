@@ -3,195 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>60-Session Clinical Protocol | National Hyperbaric Medicine Institute</title>
+    <title>Physician-Supervised Hyperbaric Oxygen Therapy | National Hyperbaric Medicine Institute</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
     <style>
         body { 
-            font-family: 'IBM Plex Sans', sans-serif; 
+            font-family: 'Source Sans 3', sans-serif; 
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        .font-display { font-family: 'Cormorant Garamond', serif; }
         .medical-gradient { 
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); 
+            background: linear-gradient(160deg, #0c1222 0%, #0f172a 35%, #1e293b 70%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .medical-blue { color: #1e40af; }
-        .medical-blue-bg { background-color: #1e40af; }
+        .medical-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('Gemini_Generated_Image_7pu5us7pu5us7pu5.png') center/cover no-repeat;
+            pointer-events: none;
+        }
+        .medical-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(160deg, rgba(12, 18, 34, 0.75) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.8) 100%);
+            pointer-events: none;
+        }
+        .medical-navy { color: #0f172a; }
+        .medical-navy-bg { background-color: #0f172a; }
+        .medical-accent { color: #1e3a5f; }
+        .medical-accent-bg { background-color: #1e3a5f; }
         .form-input { 
-            @apply w-full bg-white border border-slate-300 p-4 focus:ring-2 ring-blue-600 focus:border-blue-600 outline-none transition text-sm;
+            @apply w-full bg-white border border-slate-200 px-5 py-4 text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-slate-900/10 focus:border-slate-400 outline-none transition-all duration-200 text-base;
         }
         .form-input:focus {
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
         }
         select.form-input {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
-            background-position: right 0.75rem center;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 1rem center;
             background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
+            background-size: 1.25em 1.25em;
+            padding-right: 2.75rem;
         }
         .card-elevated {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.3s ease;
+            box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s ease;
         }
         .card-elevated:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+        }
+        .btn-primary {
+            @apply inline-block text-white px-12 py-5 font-semibold transition-all duration-300 uppercase tracking-[0.2em] text-xs rounded-sm;
+            background-color: #0d9488;
+            box-shadow: 0 2px 12px rgba(13, 148, 136, 0.35);
+        }
+        .btn-primary:hover {
+            background-color: #0f766e;
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.4);
+        }
+        .btn-hero {
+            @apply inline-block text-white font-semibold transition-all duration-300 uppercase tracking-[0.2em] rounded-2xl;
+            background-color: #0d9488;
+            padding: 1.5rem 3.5rem;
+            font-size: 1rem;
+            box-shadow: 0 2px 12px rgba(13, 148, 136, 0.35);
+        }
+        .btn-hero:hover {
+            background-color: #0f766e;
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.4);
+        }
+        .safety-section-bg {
+            background-image: url('Gemini_Generated_Image_7qi2s37qi2s37qi2.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .form-section-dark {
+            background: linear-gradient(160deg, #0c1222 0%, #0f172a 50%, #1e293b 100%);
+        }
+        .how-helps-section {
+            background-image: url('Gemini_Generated_Image_sbtyugsbtyugsbty.png');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900" x-data="{ formSubmitted: false }">
+<body class="bg-[#f8fafc] text-slate-800" x-data="{ formSubmitted: false }">
 
-    <!-- Minimal Navigation - Meta Ads Optimized -->
-    <nav class="bg-white border-b border-slate-200 py-5 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <!-- Minimal Navigation -->
+    <nav class="bg-white border-b border-slate-100 py-6 sticky top-0 z-50 backdrop-blur-md bg-white/98 shadow-sm">
+        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
             <img src="image copy.png" alt="NHMI Logo" class="h-14 w-auto">
-            <span class="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500 border border-slate-300 px-4 py-2 rounded-sm">Clinical Study Advertisement</span>
+            <span class="text-[10px] font-semibold uppercase tracking-[0.3em] text-slate-500 border border-slate-200 px-5 py-2.5 rounded-sm bg-slate-50/80">Physician-Supervised Treatment</span>
         </div>
     </nav>
 
-    <!-- Hero Section - Investigational Study Focus -->
-    <header class="medical-gradient text-white py-24 md:py-32 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-blue-400 font-semibold tracking-[0.3em] uppercase text-xs mb-8">Investigational Study • Now Accepting Inquiries</h2>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl mb-8 font-bold leading-tight tracking-tight">
-                60-Session Clinical Protocol:<br>
-                <span class="text-blue-300">Now Accepting Inquiries for Investigational Study</span>
+    <!-- Hero Section - Elite HBOT Framework -->
+    <header class="medical-gradient text-white py-32 md:py-40 px-6 relative">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h2 class="text-slate-300 font-semibold tracking-[0.35em] uppercase text-xs mb-10">National Hyperbaric Medicine Institute • Physician Directed Care</h2>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-10 font-semibold leading-[1.15] tracking-tight">
+                When Nothing Else Has Worked,<br>
+                <span class="text-slate-200">This Is Where Recovery Gets <span class="text-teal-400">Real</span>.</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-200 mb-12 font-light leading-relaxed max-w-3xl mx-auto">
-                A physician-designed investigational protocol utilizing 100% medical-grade oxygen in hard-shell hyperbaric chambers. This study is intended to promote research into neurological and systemic cellular responses associated with high-pressure oxygen therapy.
+            <p class="text-lg md:text-xl text-slate-300 mb-12 font-light leading-relaxed max-w-3xl mx-auto" style="line-height: 1.7;">
+                Help your body restart the recovery process with physician-supervised oxygen therapy.
             </p>
-            <a href="#inquiry" class="inline-block medical-blue-bg text-white px-10 py-4 font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl uppercase tracking-wider text-sm rounded-sm">
-                Request Screening Call
+            <ul class="flex flex-wrap justify-center gap-x-10 gap-y-3 mb-14 text-sm text-slate-300">
+                <li class="flex items-center">
+                    <span class="text-slate-400 mr-3">✓</span> Physician supervised treatment
+                </li>
+                <li class="flex items-center">
+                    <span class="text-slate-400 mr-3">✓</span> Hard-shell medical chambers
+                </li>
+                <li class="flex items-center">
+                    <span class="text-slate-400 mr-3">✓</span> Baseline and progress reviews included
+                </li>
+            </ul>
+            <a href="#inquiry" class="btn-hero">
+                Request Medical Evaluation
             </a>
-            <p class="text-xs text-slate-400 mt-6 italic">Participation is voluntary. Enrollment subject to physician clearance and study eligibility criteria.</p>
+            <p class="text-xs text-slate-500 mt-8 italic">Treatment subject to physician clearance and medical eligibility.</p>
         </div>
     </header>
 
-    <!-- Protocol Specifications - Enhanced Dose Section -->
-    <section class="py-20 px-6 bg-white border-b border-slate-200">
+    <!-- Section 1: Problem Awareness -->
+    <section class="py-28 px-6 bg-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-8 text-slate-900 leading-tight">When You've Done Everything Right — And You're Still Not Better</h2>
+            <p class="text-slate-600 leading-relaxed text-lg" style="line-height: 1.75;">
+                Brain fog that won't lift. Inflammation that lingers. A long plateau after injury or surgery. Treatments that didn't deliver. If you've tried conventional options and still feel stuck, you're not alone. The people who come to us have often exhausted the usual paths. They want real clinical care—treatment where progress is documented, not just hoped for.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2: Why Hyperbaric Oxygen Works Medically -->
+    <section class="py-28 px-6 bg-[#f1f5f9]">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-12 text-slate-900">Protocol Specifications</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-8 bg-slate-50 border border-slate-200 rounded-sm card-elevated">
-                    <div class="text-blue-600 font-bold text-4xl mb-3">60</div>
-                    <p class="text-sm uppercase tracking-widest font-semibold text-slate-900 mb-3">Sessions</p>
-                    <p class="text-sm text-slate-600 leading-relaxed">Intensive cadence designed to assist with long-term angiogenesis research.</p>
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div>
+                    <h2 class="font-display text-3xl md:text-4xl font-semibold mb-8 text-slate-900">How It Works: Pressure, Oxygen, and Your Body</h2>
+                    <p class="text-slate-600 mb-10 leading-relaxed text-lg" style="line-height: 1.75;">
+                        In a pressurized chamber, pure medical-grade oxygen dissolves into your plasma—reaching tissues that normal circulation often can't fully supply. That improved oxygen delivery may support better circulation to small vessels, mitochondrial function, inflammatory regulation, and tissue repair signalling. The protocol is designed to assist with blood vessel formation and immune support in targeted areas. Your physician tracks your response throughout.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="bg-white p-8 border border-slate-100 rounded-md card-elevated">
+                            <h3 class="font-semibold mb-3 text-slate-900 text-lg">Oxygen Saturation at Therapeutic Pressure</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm" style="line-height: 1.7;">100% oxygen at 1.5–2.4 ATA in hospital-grade hard-shell chambers—the clinical standard for meaningful oxygen delivery.</p>
+                        </div>
+                        <div class="bg-white p-8 border border-slate-100 rounded-md card-elevated">
+                            <h3 class="font-semibold mb-3 text-slate-900 text-lg">Designed to Support Cellular Processes</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm" style="line-height: 1.7;">May support mitochondrial function, inflammatory modulation, and tissue repair signalling—all under physician oversight.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center p-8 bg-slate-50 border border-slate-200 rounded-sm card-elevated">
-                    <div class="text-blue-600 font-bold text-4xl mb-3">100%</div>
-                    <p class="text-sm uppercase tracking-widest font-semibold text-slate-900 mb-3">Medical O₂</p>
-                    <p class="text-sm text-slate-600 leading-relaxed">Pure oxygen saturation delivered in hard-shell chambers at therapeutic pressures (1.5–2.4 ATA).</p>
-                </div>
-                <div class="text-center p-8 bg-slate-50 border border-slate-200 rounded-sm card-elevated">
-                    <div class="text-blue-600 font-bold text-4xl mb-3">MD</div>
-                    <p class="text-sm uppercase tracking-widest font-semibold text-slate-900 mb-3">Supervised</p>
-                    <p class="text-sm text-slate-600 leading-relaxed">Direct physician oversight and mandatory pre-study diagnostic clearance.</p>
+                <div class="rounded-lg overflow-hidden shadow-lg">
+                    <img src="Gemini_Generated_Image_63nwpf63nwpf63nw.png" alt="Hyperbaric oxygen therapy" class="w-full h-auto object-cover min-h-[400px]">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Study Eligibility - Inclusion/Exclusion -->
-    <section class="py-20 px-6 bg-slate-50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4 text-slate-900">Study Eligibility</h2>
-                <p class="text-slate-600 text-sm max-w-2xl mx-auto">The following criteria are intended to assist with preliminary self-qualification. Final eligibility determination is made by the study physician.</p>
+    <!-- Section: How HBOT Helps - Detailed Benefits -->
+    <section class="py-28 px-6 how-helps-section relative">
+        <div class="absolute inset-0 bg-white/90"></div>
+        <div class="max-w-6xl mx-auto relative">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-4 text-slate-900 text-center">How Does Hyperbaric Oxygen Therapy Help?</h2>
+            <p class="text-slate-600 mb-12 text-center max-w-2xl mx-auto text-lg" style="line-height: 1.75;">If you are deficient in oxygen, you may be lacking the energy required to heal. HBOT is designed to assist with the following physiological effects that may support your healing response:</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Inhibits Bacterial Infections</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">Elevated oxygen levels may help create an environment less favorable to certain anaerobic bacteria.</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Reduces Inflammation and Swelling</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">May support inflammatory modulation and help reduce tissue swelling.</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Stimulates New Blood Vessel Growth</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">Angiogenesis support—designed to assist with formation of new capillaries in underperfused tissues.</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Increases Collagen Production</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">May support tissue repair signalling and collagen synthesis involved in wound healing.</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Improves Immune Response</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">Designed to assist with immune function and cellular defense mechanisms.</p>
+                    </div>
+                    <div class="bg-slate-50 p-8 border border-slate-100 rounded-md card-elevated">
+                        <h3 class="font-semibold mb-2 text-slate-900">Stem Cell Mobilization</h3>
+                        <p class="text-slate-600 text-sm" style="line-height: 1.6;">May help promote mobilization of stem cells from bone marrow to support tissue repair.</p>
+                    </div>
             </div>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Inclusion Criteria -->
-                <div class="bg-white p-8 border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold text-lg mb-6 text-slate-900 uppercase tracking-wide text-sm">Inclusion Criteria</h3>
-                    <ul class="space-y-4 text-sm text-slate-700">
-                        <li class="flex items-start">
-                            <span class="text-blue-600 mr-3 font-bold">•</span>
-                            <span>Adults aged 18-75 years seeking investigational hyperbaric oxygen therapy</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-600 mr-3 font-bold">•</span>
-                            <span>Ability to commit to 5 sessions per week for 12 consecutive weeks</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-600 mr-3 font-bold">•</span>
-                            <span>Medical clearance from primary care physician or specialist</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-600 mr-3 font-bold">•</span>
-                            <span>Interest in areas of cognitive function, systemic inflammation, tissue recovery, or cellular optimization research</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-blue-600 mr-3 font-bold">•</span>
-                            <span>No contraindications to hyperbaric oxygen therapy as determined by study physician</span>
-                        </li>
+        </div>
+    </section>
+
+    <!-- Section 3: Outcomes Physicians Monitor -->
+    <section class="py-28 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-8 text-slate-900 text-center">What Physicians Look For During Treatment</h2>
+            <p class="text-slate-600 mb-16 text-center max-w-2xl mx-auto text-lg" style="line-height: 1.7;">These are the areas physicians commonly monitor—evidence-guided indicators of potential improvement. Treatment response varies.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-4 text-slate-900 text-lg">Cognitive Function</h3>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Potential shifts in neuro-inflammation and executive function—areas your physician can track through clinical assessment.</p>
+                </div>
+                <div class="p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-4 text-slate-900 text-lg">Systemic Response</h3>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Changes in inflammatory and oxidative markers that may appear in lab work—reviewed at physician checkpoints.</p>
+                </div>
+                <div class="p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-4 text-slate-900 text-lg">Tissue Recovery</h3>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Soft-tissue and post-surgical healing—assessed by your physician over the course of care.</p>
+                </div>
+                <div class="p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-4 text-slate-900 text-lg">Cellular Optimization</h3>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Cellular and mitochondrial indicators physicians may monitor—alongside your clinical picture and functional goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: How Progress Is Clinically Tracked -->
+    <section class="py-28 px-6 bg-[#f1f5f9]">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-8 text-slate-900 text-center">How Your Progress Is Tracked</h2>
+            <p class="text-slate-600 mb-16 text-center max-w-2xl mx-auto text-lg" style="line-height: 1.7;">Part of what makes this program serious is the structure. Your physician reviews your response at clear checkpoints—so you know where you stand.</p>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-white p-10 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-6 text-slate-900 text-lg">Baseline and Progress Assessment</h3>
+                    <ul class="space-y-4 text-slate-700" style="line-height: 1.7;">
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Pre-treatment clearance and baseline evaluation</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Symptom and functional scoring at defined intervals</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Structured physician checkpoints to review your response</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Before-and-after documentation for a clear picture of progress</li>
                     </ul>
                 </div>
-                <!-- Exclusion Criteria -->
-                <div class="bg-white p-8 border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold text-lg mb-6 text-slate-900 uppercase tracking-wide text-sm">Exclusion Criteria</h3>
-                    <ul class="space-y-4 text-sm text-slate-700">
-                        <li class="flex items-start">
-                            <span class="text-slate-400 mr-3 font-bold">•</span>
-                            <span>Active untreated pneumothorax or severe pulmonary conditions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-slate-400 mr-3 font-bold">•</span>
-                            <span>Uncontrolled claustrophobia or inability to tolerate chamber environment</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-slate-400 mr-3 font-bold">•</span>
-                            <span>Pregnancy or planning pregnancy during study period</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-slate-400 mr-3 font-bold">•</span>
-                            <span>Certain medications or medical devices that may contraindicate HBOT</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-slate-400 mr-3 font-bold">•</span>
-                            <span>Inability to provide informed consent or complete study requirements</span>
-                        </li>
+                <div class="bg-white p-10 border border-slate-100 rounded-md card-elevated">
+                    <h3 class="font-semibold mb-6 text-slate-900 text-lg">What We Track</h3>
+                    <ul class="space-y-4 text-slate-700" style="line-height: 1.7;">
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Biomarker and lab changes over time</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Functional and symptom scores</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Medical data reviewed with you at each checkpoint</li>
+                        <li class="flex items-start"><span class="text-slate-400 mr-3 font-bold">•</span> Clinical documentation—so progress is real, not assumed</li>
                     </ul>
-                    <p class="text-xs text-slate-500 mt-6 italic">Final eligibility is determined by the study physician during screening.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Study Focus Areas -->
-    <section class="py-20 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4 text-slate-900">Study Focus Areas</h2>
-                <p class="text-slate-600 text-sm max-w-2xl mx-auto italic">This investigational study is designed to assist with research in the following areas:</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-8 bg-white border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold mb-3 text-slate-900">Cognitive Function</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Researching the impact of high-pressure oxygen on neuro-inflammation and executive function markers.</p>
+    <!-- Section 5: Structured Treatment Plan -->
+    <section class="py-28 px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-8 text-slate-900 text-center">Structured Treatment Plan</h2>
+            <p class="text-slate-600 mb-14 text-center max-w-2xl mx-auto text-lg" style="line-height: 1.75;">
+                To properly evaluate how you respond, physicians need a defined treatment arc. A structured multi-session protocol creates the framework for baseline, midpoint, and progress reviews—so your response over time can be documented and discussed with you, not guessed.
+            </p>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="text-center p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <div class="medical-accent font-display font-semibold text-5xl mb-4">60</div>
+                    <p class="text-sm uppercase tracking-[0.25em] font-semibold text-slate-900 mb-4">Sessions</p>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">A structured cadence that gives your physician enough time and data to properly assess your response.</p>
                 </div>
-                <div class="p-8 bg-white border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold mb-3 text-slate-900">Systemic Response</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Assessing biological markers of inflammation and oxidative stress over a 60-session period.</p>
+                <div class="text-center p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <div class="medical-accent font-display font-semibold text-5xl mb-4">100%</div>
+                    <p class="text-sm uppercase tracking-[0.25em] font-semibold text-slate-900 mb-4">Medical O₂</p>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Pure oxygen at therapeutic pressures (1.5–2.4 ATA) in hard-shell chambers.</p>
                 </div>
-                <div class="p-8 bg-white border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold mb-3 text-slate-900">Tissue Recovery</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Evaluating healing acceleration associated with complex soft-tissue or post-surgical recovery needs.</p>
-                </div>
-                <div class="p-8 bg-white border border-slate-200 rounded-sm card-elevated">
-                    <h3 class="font-bold mb-3 text-slate-900">Cellular Optimization</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Investigating cellular senescence and mitochondrial health through structured hyper-oxygenation protocols.</p>
+                <div class="text-center p-10 bg-slate-50/50 border border-slate-100 rounded-md card-elevated">
+                    <div class="medical-accent font-display font-semibold text-5xl mb-4">MD</div>
+                    <p class="text-sm uppercase tracking-[0.25em] font-semibold text-slate-900 mb-4">Supervised</p>
+                    <p class="text-slate-600 leading-relaxed" style="line-height: 1.7;">Direct physician oversight and mandatory pre-treatment diagnostic clearance.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Inquiry Form - Enhanced with Success State -->
-    <section id="inquiry" class="py-24 px-6 medical-gradient text-white">
+    <!-- Section: FDA Approved Conditions - Accordion -->
+    <section class="py-28 px-6 bg-[#f1f5f9]" x-data="{ open: false }">
         <div class="max-w-3xl mx-auto">
-            <div class="bg-white text-slate-900 p-8 md:p-12 lg:p-16 rounded-sm shadow-2xl" x-show="!formSubmitted">
-                <h2 class="text-3xl font-bold mb-4 text-center text-slate-900">Interest Inquiry Form</h2>
-                <p class="text-center text-slate-600 text-sm mb-8 font-light">This investigational study advertisement and protocol are subject to IRB/Ethics Committee review.</p>
+            <h2 class="font-display text-3xl md:text-4xl font-semibold mb-4 text-slate-900 text-center">FDA Approved Conditions</h2>
+            <p class="text-slate-600 mb-8 text-center text-sm" style="line-height: 1.6;">We are qualified to offer insurance-covered HBOT for FDA-approved conditions. Our team assists with the pre-approval process where applicable.</p>
+            <div class="bg-white rounded-lg border border-slate-200 overflow-hidden card-elevated">
+                <button @click="open = !open" class="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                    <span class="font-semibold text-slate-900">View conditions that may qualify for insurance-covered HBOT</span>
+                    <svg class="w-5 h-5 text-slate-500 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div x-show="open" x-transition class="border-t border-slate-100">
+                    <div class="px-8 py-6">
+                        <div class="grid md:grid-cols-2 gap-x-12 gap-y-3 text-sm text-slate-700">
+                            <ul class="space-y-2">
+                                <li>• Acute Traumatic Ischemia</li>
+                                <li>• Air or Gas Embolism</li>
+                                <li>• Anemia and Blood Loss</li>
+                                <li>• Bone Infection / Non-Healing Bone</li>
+                                <li>• Carbon Monoxide Poisoning</li>
+                                <li>• Compromised Skin Flaps/Grafts</li>
+                                <li>• Cyanide Poisoning</li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li>• Decompression Sickness</li>
+                                <li>• Gas Gangrene</li>
+                                <li>• Necrotizing Soft Tissue Infections</li>
+                                <li>• Radiation Effects (post-cancer therapies)</li>
+                                <li>• Thermal or Extensive Burns</li>
+                                <li>• Refractory Osteomyelitis</li>
+                                <li>• Sudden Sensorineural Hearing Loss (SSHL)*</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-6 italic">*Coverage varies by insurer. Our insurance specialists can assist with eligibility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Authority and Facility Credibility -->
+    <section class="py-28 px-6 safety-section-bg relative min-h-[600px] flex items-center">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="bg-white p-10 lg:p-12 rounded-lg shadow-xl border border-slate-100">
+                    <h2 class="font-display text-3xl md:text-4xl font-semibold mb-10 text-slate-900">Clinical Facility and Medical Safety</h2>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="font-semibold mb-3 text-slate-900 text-lg">Hard Shell Chambers</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm" style="line-height: 1.7;">Hospital-grade chambers delivering 100% medical oxygen at therapeutic pressure (1.5–2.4 ATA)—the real clinical standard. Not the soft wellness chambers you may have seen elsewhere.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-3 text-slate-900 text-lg">Physician Oversight</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm" style="line-height: 1.7;">Every patient is under direct physician supervision. Eligibility is based on your history, contraindications, and physician judgment—no shortcuts.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-3 text-slate-900 text-lg">Medical Safety Protocols</h3>
+                            <p class="text-slate-600 leading-relaxed text-sm" style="line-height: 1.7;">Pre-treatment clearance, contraindication screening, and continuous monitoring throughout your care. This is a Florida private regenerative medicine institute—we take safety seriously.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Screening CTA -->
+    <section id="inquiry" class="py-32 px-6 form-section-dark text-white relative">
+        <div class="max-w-3xl mx-auto relative">
+            <div class="bg-white text-slate-900 p-10 md:p-16 lg:p-20 rounded-md shadow-xl border border-slate-100" x-show="!formSubmitted">
+                <h2 class="font-display text-3xl md:text-4xl font-semibold mb-6 text-center text-slate-900">Request Medical Eligibility Review</h2>
+                <p class="text-center text-slate-600 text-base mb-10 font-light" style="line-height: 1.7;">This is a confidential medical intake. A clinical team member will reach out to discuss your goals and whether this program may be a fit. No pressure—just a conversation.</p>
                 
                 <form class="space-y-6" @submit.prevent="formSubmitted = true">
                     <div class="grid md:grid-cols-2 gap-6">
@@ -208,7 +380,7 @@
                         </div>
                         <div>
                             <select class="form-input" name="interest" required>
-                                <option value="">Select Area of Interest</option>
+                                <option value="">Primary Treatment Interest</option>
                                 <option value="cognitive">Cognitive Function / Neuro</option>
                                 <option value="systemic">Systemic Inflammation</option>
                                 <option value="longevity">Cellular Optimization / Longevity</option>
@@ -216,66 +388,75 @@
                             </select>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-3 p-5 bg-slate-50 border border-slate-200 rounded-sm">
-                        <input type="checkbox" required class="mt-1.5 w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500" id="consent">
-                        <label for="consent" class="text-xs text-slate-700 leading-relaxed">
-                            I understand this investigational protocol requires 5 sessions per week for 12 weeks. Enrollment is voluntary and subject to physician clearance and study eligibility criteria. I acknowledge that this is an investigational study and that results are not guaranteed.
+                    <div class="flex items-start space-x-4 p-6 bg-slate-50 border border-slate-100 rounded-md">
+                        <input type="checkbox" required class="mt-1.5 w-5 h-5 text-slate-800 border-slate-300 rounded focus:ring-slate-900/20" id="consent">
+                        <label for="consent" class="text-sm text-slate-700 leading-relaxed" style="line-height: 1.6;">
+                            I understand that treatment is subject to physician clearance. I am requesting a screening call to learn whether this protocol may be appropriate for my situation.
                         </label>
                     </div>
-                    <div class="bg-blue-50 border border-blue-200 p-4 rounded-sm">
-                        <p class="text-xs text-blue-900 leading-relaxed">
-                            <strong class="font-semibold">Voluntary Participation:</strong> Participation in this investigational study is entirely voluntary. You may withdraw at any time without penalty. Your decision to participate or not will not affect any current or future medical care.
+                    <div class="bg-slate-50 border border-slate-100 p-5 rounded-md">
+                        <p class="text-sm text-slate-700 leading-relaxed" style="line-height: 1.6;">
+                            <strong class="font-semibold text-slate-900">Confidential:</strong> Your information is used only for clinical intake. We do not share it with third parties without your consent, except as required by law.
                         </p>
                     </div>
-                    <button type="submit" class="w-full medical-blue-bg text-white py-5 font-semibold uppercase tracking-wider text-sm hover:bg-blue-700 transition-all rounded-sm shadow-lg">
-                        Submit Interest for Screening Call
+                    <button type="submit" class="w-full btn-primary text-center py-5">
+                        Check Eligibility
                     </button>
                 </form>
             </div>
 
             <!-- Success State -->
-            <div class="bg-white text-slate-900 p-8 md:p-12 lg:p-16 rounded-sm shadow-2xl text-center" x-show="formSubmitted" x-transition>
-                <div class="mb-6">
-                    <svg class="w-16 h-16 text-green-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white text-slate-900 p-10 md:p-16 lg:p-20 rounded-md shadow-xl border border-slate-100 text-center" x-show="formSubmitted" x-transition>
+                <div class="mb-8">
+                    <svg class="w-20 h-20 text-emerald-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold mb-4 text-slate-900">Thank You for Your Interest</h2>
-                <p class="text-lg text-slate-600 mb-6 leading-relaxed">
-                    Your inquiry has been received. A member of our clinical team will contact you within 2-3 business days to schedule a preliminary screening call.
+                <h2 class="font-display text-3xl md:text-4xl font-semibold mb-6 text-slate-900">Thank You</h2>
+                <p class="text-lg text-slate-600 mb-6 leading-relaxed" style="line-height: 1.7;">
+                    We've received your request. A member of our clinical team will contact you within 2–3 business days to schedule your eligibility screening call.
                 </p>
-                <p class="text-sm text-slate-500 italic">
-                    During the screening call, we will discuss study eligibility, protocol details, and answer any questions you may have about this investigational study.
+                <p class="text-slate-500 italic" style="line-height: 1.6;">
+                    During the call, we'll discuss your goals, your history, and whether this program may be right for you.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Footer - Enhanced Compliance -->
-    <footer class="bg-slate-950 text-slate-400 py-16 px-6 border-t border-slate-800">
+    <!-- Quote Block -->
+    <section class="relative bg-[#0f172a] py-24 md:py-32 px-6 overflow-hidden">
+        <div class="h-2 bg-amber-100/40 w-full max-w-4xl mx-auto mb-20"></div>
+        <div class="max-w-3xl mx-auto text-center relative">
+            <blockquote class="text-white text-xl md:text-2xl lg:text-3xl font-semibold leading-relaxed" style="line-height: 1.6;">
+                "I came in with stalled recovery after years of conventional treatment. The team tracked my progress with real data—not just how I felt. Game changer."
+            </blockquote>
+            <p class="mt-8 text-slate-400 text-sm uppercase tracking-widest">— Michael R. Real Patient</p>
+        </div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 md:w-96 md:h-96 rounded-full bg-[#0c1222] -translate-y-1/2 translate-x-1/2 blur-3xl opacity-80"></div>
+    </section>
+
+    <!-- Footer - Compliance -->
+    <footer class="bg-slate-950 text-slate-400 py-20 px-6 border-t border-slate-800">
         <div class="max-w-5xl mx-auto">
-            <p class="text-xs tracking-widest uppercase mb-10 text-center font-semibold text-slate-300">National Hyperbaric Medicine Institute (NHMI)</p>
+            <p class="text-xs tracking-[0.3em] uppercase mb-12 text-center font-semibold text-slate-400">National Hyperbaric Medicine Institute (NHMI)</p>
             
-            <div class="text-xs leading-relaxed space-y-5 max-w-4xl mx-auto mb-10">
+            <div class="text-sm leading-relaxed space-y-6 max-w-4xl mx-auto mb-12" style="line-height: 1.75;">
                 <p class="text-slate-500">
-                    <strong class="text-slate-300">Investigational Study Notice:</strong> This is an investigational clinical protocol. Hyperbaric oxygen therapy (HBOT) is an adjunctive therapy. Not all applications are FDA-evaluated. We do not claim to cure, treat, or prevent specific diseases. This study is designed to assist with research into the effects of high-pressure oxygen therapy.
+                    <strong class="text-slate-400">Medical Disclaimer:</strong> Hyperbaric oxygen therapy (HBOT) is an adjunctive therapy. Not all applications are FDA-evaluated. We do not claim to cure, treat, or prevent specific diseases. Treatment is designed to assist with physiological support under physician supervision. Results vary.
                 </p>
                 <p class="text-slate-500">
-                    <strong class="text-slate-300">IRB/Ethics Committee Review:</strong> This advertisement constitutes a direct-to-patient invitation for study interest and has been designed to meet strict adherence to ethical and legal guidelines. The protocol and advertising materials are subject to Institutional Review Board (IRB) or Ethics Committee review.
+                    <strong class="text-slate-400">Eligibility:</strong> Physician screening is mandatory. Treatment is based on medical history, current medications, contraindication review, and physician determination. Patients undergo physician-supervised treatment after clearance.
                 </p>
                 <p class="text-slate-500">
-                    <strong class="text-slate-300">Enrollment Requirements:</strong> Physician screening is mandatory. Enrollment is based on medical history, current medications, inclusion/exclusion criteria, and physician determination of eligibility. Participation is voluntary and may be withdrawn at any time.
+                    <strong class="text-slate-400">HIPAA Compliance:</strong> All personal health information is handled in accordance with HIPAA. Your information is used solely for clinical intake and treatment coordination and will not be shared with third parties without your explicit consent, except as required by law.
                 </p>
                 <p class="text-slate-500">
-                    <strong class="text-slate-300">HIPAA Compliance:</strong> All personal health information collected during the screening and enrollment process is handled in accordance with the Health Insurance Portability and Accountability Act (HIPAA). Your information will be used solely for study screening and enrollment purposes and will not be shared with third parties without your explicit consent, except as required by law.
-                </p>
-                <p class="text-slate-500">
-                    <strong class="text-slate-300">Hard-Shell Chamber Definition:</strong> This protocol utilizes hard-shell hyperbaric chambers capable of delivering 100% medical-grade oxygen at pressures of 1.5-2.4 ATA (atmospheres absolute), which distinguishes this from "mild" soft-chamber systems.
+                    <strong class="text-slate-400">Hard-Shell Chamber:</strong> This protocol utilizes hard-shell hyperbaric chambers capable of delivering 100% medical-grade oxygen at pressures of 1.5–2.4 ATA (atmospheres absolute), which distinguishes this from mild soft-chamber systems.
                 </p>
             </div>
             
-            <div class="mt-12 pt-8 border-t border-slate-900 text-center">
-                <p class="text-xs text-slate-600 italic">
+            <div class="pt-10 border-t border-slate-800 text-center">
+                <p class="text-sm text-slate-600 italic">
                     &copy; 2026 National Hyperbaric Medicine Institute (NHMI). Tampa, Florida Clinical Headquarters.
                 </p>
             </div>
